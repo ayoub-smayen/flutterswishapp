@@ -8,6 +8,9 @@ void main() {
   ));
 }
 */
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
+import 'package:swishapp/api/stream_api.dart';
+import 'package:swishapp/config/config.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -43,6 +46,7 @@ import 'presentation/features/checkout/checkout.dart';
 import 'presentation/features/favorites/favorites.dart';
 import 'presentation/features/home/home.dart';
 import 'presentation/features/profile/profile.dart';
+import 'package:swishapp/screens/StreamChat.dart';
 
 import 'locator.dart' as service_locator;
 
@@ -67,6 +71,42 @@ class SimpleBlocDelegate extends BlocObserver {
 }
 
 void main() async {
+  final client = Client(Config.apiKey, logLevel: Level.SEVERE);
+
+  await StreamApi.initUser(
+    client,
+    username: 'Emily',
+    urlImage:
+        'https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png',
+    id: Config.idEmily,
+    token: Config.tokenEmily,
+  );
+
+//  await StreamApi.initUser(
+//    client,
+//    username: 'Peter',
+//    urlImage:
+//        'https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg',
+//    id: Config.idPeter,
+//    token: Config.tokenPeter,
+//  );
+
+//  final channel = await StreamApi.createChannel(
+//    client,
+//    type: 'messaging',
+//    id: 'sample2',
+//    name: 'Family',
+//    image:
+//        'https://image.freepik.com/fotos-kostenlos/glueckliche-familie-in-einer-reihe-liegen_1098-1101.jpg',
+//    idMembers: [Config.idEmily, Config.idPeter],
+//  );
+
+  final channel = await StreamApi.watchChannel(
+    client,
+    type: 'messaging',
+    id: 'sample',
+  );
+
   await service_locator.init();
 
   var delegate = await LocalizationDelegate.create(
@@ -112,6 +152,11 @@ void main() async {
 }
 
 class OpenFlutterEcommerceApp extends StatelessWidget {
+  final Client client;
+  final Channel channel;
+
+  const OpenFlutterEcommerceApp({Key key, this.client, this.channel})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     var localizationDelegate = LocalizedApp.of(context).delegate;
@@ -128,7 +173,7 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
           supportedLocales: localizationDelegate.supportedLocales,
           debugShowCheckedModeBanner: false,
           locale: localizationDelegate.currentLocale,
-          title: 'Open FLutter E-commerce',
+          title: 'virstand',
           theme: OpenFlutterEcommerceTheme.of(context),
           routes: _registerRoutes(),
         ));
@@ -138,7 +183,8 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
     return <String, WidgetBuilder>{
       OpenFlutterEcommerceRoutes.home: (context) => HomeScreen(),
       OpenFlutterEcommerceRoutes.shop: (context) => HomePage(),
-      // OpenFlutterEcommerceRoutes.chat: (context) => ChatPage(),
+      OpenFlutterEcommerceRoutes.filters: (context) => MyHomeStreamPage(
+          title: 'Stream Chat', client: client, channel: channel),
       OpenFlutterEcommerceRoutes.cart: (context) => CartScreen(),
       OpenFlutterEcommerceRoutes.checkout: (context) => CheckoutScreen(),
       OpenFlutterEcommerceRoutes.favourites: (context) => FavouriteScreen(),

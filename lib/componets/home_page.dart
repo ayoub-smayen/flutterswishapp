@@ -5,10 +5,14 @@ import 'package:swishapp/componets/horizontal_listview.dart';
 import 'package:swishapp/componets/horizontal.dart';
 import 'package:swishapp/componets/navtext.dart';
 import 'package:swishapp/componets/nav.dart';
+import 'package:swishapp/componets/shopmohamed.dart';
 import 'package:swishapp/pages/grid4view.dart';
+import 'package:swishapp/pages/shoppage1.dart';
+import 'package:swishapp/presentation/features/products/products.dart';
+import 'package:swishapp/presentation/widgets/independent/bottom_menu.dart';
 import 'package:swishapp/screens/screen1.dart';
-
-import 'bottom_navigationbar.dart';
+import 'ShopGrid1.dart';
+//import 'bottom_navigationbar.dart';
 import 'horizantolbottoms.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,6 +21,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final int bottomMenuIndex;
+
+  _HomePageState({this.bottomMenuIndex});
   int currentIndex;
   @override
   void initState() {
@@ -99,16 +106,30 @@ class _HomePageState extends State<HomePage> {
           new Padding(
             padding: const EdgeInsets.all(8.0),
             child: new Text(
-              '    POPULAR LIVE STREAM',
+              '    Boutiques',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
           Screen1(),
+
           HorizontalBottoms(),
+          //
           Gird4(),
-          Nav(),
-          Navtext(),
-          Bottom(),
+          //  ProductsListView(),
+
+          //Nav(),
+
+          ShopGridHome(title: "shpgrid"),
+
+          ShopPage1(title: "shopping"),
+          /* MyHomePage(
+            title: "shoppingmed",
+          ),*/
+          // Navtext(),
+          OpenFlutterBottomMenu(1),
+
+          //  Bottom(),
+          //OpenFlutterCollapsingScaffold()
         ],
       ),
     );

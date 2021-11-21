@@ -5,12 +5,12 @@ import 'package:swishapp/pages/chat_item_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-class ChatPage extends StatefulWidget {
+class ChatPage1 extends StatefulWidget {
   @override
   _ChatPageState createState() => _ChatPageState();
 }
 
-class _ChatPageState extends State<ChatPage> {
+class _ChatPageState extends State<ChatPage1> {
   List<ChatModel> list = ChatModel.list;
 
   @override

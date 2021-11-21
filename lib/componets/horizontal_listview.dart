@@ -6,7 +6,7 @@ import 'package:swishapp/messenger/pages/chat.dart';
 import 'package:swishapp/pages/chat_page.dart';
 import 'package:swishapp/social_media/streaming.dart';
 import 'package:swishapp/users/user-list.dart';
-
+import 'package:swishapp/screens/Chatstreamscreen1.dart';
 import 'bottom_navigationbar.dart';
 
 class HorizontalList extends StatelessWidget {
@@ -79,7 +79,7 @@ class HorizontalList extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ChatPage(),
+                      builder: (context) => ChatPage1(),
                     ));
               },
             ),
@@ -150,6 +150,28 @@ class HorizontalList extends StatelessWidget {
           ),
           Ink(
             decoration: ShapeDecoration(
+              color: Colors.orange,
+              shape: CircleBorder(),
+            ),
+            child: IconButton(
+              icon: Icon(
+                Icons.chat_bubble,
+                color: Colors.white,
+              ),
+              iconSize: 40.0,
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ChatStreamScreen1()));
+              },
+            ),
+          ),
+          SizedBox(
+            width: 20.0,
+          ),
+          Ink(
+            decoration: ShapeDecoration(
               color: Colors.white,
               shape: CircleBorder(),
             ),
@@ -157,6 +179,23 @@ class HorizontalList extends StatelessWidget {
               icon: Icon(
                 Icons.wallet_giftcard_sharp,
                 color: Colors.orange,
+              ),
+              iconSize: 40.0,
+              onPressed: () {},
+            ),
+          ),
+          SizedBox(
+            width: 20.0,
+          ),
+          Ink(
+            decoration: ShapeDecoration(
+              color: Colors.orange,
+              shape: CircleBorder(),
+            ),
+            child: IconButton(
+              icon: Icon(
+                Icons.flash_on_sharp,
+                color: Colors.white,
               ),
               iconSize: 40.0,
               onPressed: () {},
